@@ -13,5 +13,7 @@
   <%= f.number_field :price %>
   <%= f.label :enrollment_deadline, 'Data limite de matrícula' %>
   <%= f.date_field :enrollment_deadline %>
+  <%= f.label :banner, 'Banner' %>
+  <%= f.file_field :banner %>
   <%= f.submit 'Criar curso' %>
 <% end %>

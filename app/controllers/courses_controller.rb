@@ -39,6 +39,6 @@ class CoursesController < ApplicationController
   def course_params
     params
       .require(:course)
-      .permit(:name, :description, :code, :price, :enrollment_deadline)
+      .permit(:name, :description, :code, :price, :enrollment_deadline, :banner)
   end
 end
