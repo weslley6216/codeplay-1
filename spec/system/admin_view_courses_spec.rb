@@ -22,13 +22,16 @@ describe 'Admin view courses' do
   end
 
   it 'and view details' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', instructor: instructor)
     Course.create!(name: 'Ruby on Rails',
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
                    enrollment_deadline: '20/12/2033',
+                   instructor: instructor,
                    banner: fixture_file_upload(Rails.root.join('spec/fixtures/course.png')))
 
     visit root_path
@@ -36,6 +39,7 @@ describe 'Admin view courses' do
     click_on 'Ruby on Rails'
 
     expect(page).to have_css('img[src*="course.png"]')
+    expect(page).to have_content('Fulano Sicrano')
     expect(page).to have_content('Ruby on Rails')
     expect(page).to have_content('Um curso de Ruby on Rails')
     expect(page).to have_content('RUBYONRAILS')
