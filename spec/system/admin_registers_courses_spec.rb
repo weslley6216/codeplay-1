@@ -32,21 +32,16 @@ describe 'Admin registers courses' do
     expect(page).to have_link('Voltar')
   end
 
-  xit 'and attributes cannot be blank' do
+  it 'and attributes cannot be blank' do
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'
-    fill_in 'Nome', with: ''
-    fill_in 'Descrição', with: ''
-    fill_in 'Código', with: ''
-    fill_in 'Preço', with: ''
-    fill_in 'Data limite de matrícula', with: ''
     click_on 'Criar curso'
 
     expect(page).to have_content('não pode ficar em branco', count: 3)
   end
 
-  xit 'and code must be unique' do
+  it 'and code must be unique' do
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
                    enrollment_deadline: '22/12/2033')

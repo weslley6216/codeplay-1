@@ -3,14 +3,14 @@
 <% end %>
 <h1><%= @course.name %></h1>
 <dl>
-  <dt>Descrição</dt>
+  <dt><%= Course.human_attribute_name(:description) %></dt>
   <dd><%= @course.description %></dd>
   <dt>Código</dt>
   <dd><%= @course.code %></dd>
   <dt>Preço</dt>
-  <dd><%= number_to_currency @course.price, unit: 'R$', separator: ',', delimiter: '.', format: '%u %n' %></dd>
+  <dd><%= number_to_currency @course.price %></dd>
   <dt>Data limite de matrícula</dt>
-  <dd><%= @course.enrollment_deadline.strftime('%d/%m/%Y') %></dd>
+  <dd><%= l @course.enrollment_deadline %></dd>
 </dl>
 
 <%= link_to 'Editar', edit_course_path(@course) %>

@@ -1,15 +1,3 @@
 <h1>Atualizar um curso</h1>
 
-<%= form_with model: @course do |f| %>
-  <%= f.label :name, 'Nome' %>
-  <%= f.text_field :name %>
-  <%= f.label :description, 'Descrição' %>
-  <%= f.text_area :description %>
-  <%= f.label :code, 'Código' %>
-  <%= f.text_field :code %>
-  <%= f.label :price, 'Preço' %>
-  <%= f.number_field :price %>
-  <%= f.label :enrollment_deadline, 'Data limite de matrícula' %>
-  <%= f.date_field :enrollment_deadline %>
-  <%= f.submit 'Salvar' %>
-<% end %>
+<%= render 'form', course: @course, button_text: 'Salvar' %>
