@@ -11,6 +11,8 @@
   <dd><%= number_to_currency @course.price %></dd>
   <dt>Data limite de matrícula</dt>
   <dd><%= l @course.enrollment_deadline %></dd>
+  <dt>Instrutor(a)</dt>
+  <dd><%= @course.instructor.name %></dd>
 </dl>
 
 <%= link_to 'Editar', edit_course_path(@course) %>

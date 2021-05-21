@@ -20,6 +20,8 @@
   <%= f.number_field :price %>
   <%= f.label :enrollment_deadline %>
   <%= f.date_field :enrollment_deadline %>
+  <%= f.label :instructor_id, 'Instrutor(a)' %>
+  <%= f.collection_select :instructor_id, instructors, :id, :display_name %>
   <%= f.label :banner %>
   <%= f.file_field :banner %>
   <%= f.submit button_text %>
