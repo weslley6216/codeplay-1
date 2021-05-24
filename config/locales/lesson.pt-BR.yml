@@ -1,0 +1,6 @@
+---
+pt-BR:
+  lesson:
+    duration:
+      one: '1 minuto'
+      other: '%{count} minutos'
