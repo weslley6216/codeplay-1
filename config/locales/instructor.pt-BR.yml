@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      instructor:
+        one: Instrutor
+        other: Instrutores
+    attributes:
+      instructor:
+        name: Nome
+        email: E-mail
+        courses: Cursos

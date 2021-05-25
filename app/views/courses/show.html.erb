@@ -21,8 +21,11 @@
 <%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
 
 <div id="lessons">
+  <% if @course.lessons.empty? %>
+    <p><%= t('.empty') %></p>
+  <% end %>
   <% @course.lessons.each do |lesson| %>
-    <%= link_to lesson.name, '#' %>
+    <%= link_to lesson.name, [@course, lesson] %>
     <p><%= t('lesson.duration', count: lesson.duration) %></p>
   <% end %>
 </div>

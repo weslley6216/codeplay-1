@@ -21,6 +21,19 @@ describe 'Admin registers lessons' do
     expect(current_path).to eq(course_path(course))
   end
 
-  xit 'and fill and fields' do
+  it 'and fill and fields' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033', instructor: instructor)
+
+    visit course_path(course)
+    click_on 'Registrar uma aula'
+    click_on 'Cadastrar'
+
+    expect(page).to have_text('Nome não pode ficar em branco')
+    expect(page).to have_text('Duração não pode ficar em branco')
+    expect(page).to have_text('Conteúdo não pode ficar em branco')
   end
 end
