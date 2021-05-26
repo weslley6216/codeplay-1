@@ -25,7 +25,9 @@
     <p><%= t('.empty') %></p>
   <% end %>
   <% @course.lessons.each do |lesson| %>
-    <%= link_to lesson.name, [@course, lesson] %>
-    <p><%= t('lesson.duration', count: lesson.duration) %></p>
+    <div>
+      <%= link_to lesson.name, [@course, lesson] %>
+      <p><%= t('lesson.duration', count: lesson.duration) %></p>
+    </div>
   <% end %>
 </div>
