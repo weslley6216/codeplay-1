@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'Student view courses on homepage' do
-  scenario 'courses with enrollment still available' do
+describe 'Student view courses on homepage' do
+  it 'courses with enrollment still available' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -22,7 +22,7 @@ feature 'Student view courses on homepage' do
     expect(page).not_to have_content('R$ 12,00')
   end
 
-  scenario 'and view enrollment link' do
+  it 'and view enrollment link' do
     user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
@@ -37,11 +37,11 @@ feature 'Student view courses on homepage' do
     expect(page).to have_link 'Comprar'
   end
 
-  xscenario 'and does not view enrollment if deadline is over' do
+  xit 'and does not view enrollment if deadline is over' do
     # curso com data limite ultrapassada mas com usuario logado não deve exibir o link
   end
 
-  scenario 'must be signed in to enroll' do
+  it 'must be signed in to enroll' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -56,7 +56,7 @@ feature 'Student view courses on homepage' do
     expect(page).to have_link 'login', href: new_user_session_path
   end
 
-  scenario 'and buy a course' do
+  it 'and buy a course' do
     user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
@@ -75,6 +75,30 @@ feature 'Student view courses on homepage' do
     expect(page).to have_content 'Curso comprado com sucesso'
     expect(current_path).to eq my_courses_courses_path
     expect(page).to have_content 'Ruby'
+    expect(page).to have_content 'R$ 10,00'
     expect(page).not_to have_content 'Elixir'
+    expect(page).not_to have_content 'R$ 20,00'
+  end
+
+  it 'and cannot buy a course twice' do
+    user = User.create!(email: 'jane@test.com.br', password: '123456')
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
+    available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Lesson.create!(name: 'Monkey Patch', course: available_course, duration: 20,
+                   content: 'Uma aula legal')
+    Enrollment.create!(user: user, course: available_course)
+
+    login_as user, scope: :user
+    visit root_path
+    click_on 'Ruby'
+
+    expect(page).to_not have_link 'Comprar'
+    expect(page).to have_link 'Monkey Patch'
+  end
+
+  xit 'without enrollment cannot view lesson link' do
   end
 end

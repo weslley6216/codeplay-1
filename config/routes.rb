@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :lessons, only: %i[show new create]
-    #ROTA CUSTOMIZADA/PERSONALIZADA
     post 'enroll', on: :member
     get 'my_courses', on: :collection
   end
