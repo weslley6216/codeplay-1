@@ -1,4 +1,4 @@
-class CoursesController < ApplicationController
+class Admin::CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy enroll]
 
   def index
@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
 
   def destroy
     @course.destroy
-    redirect_to courses_path, notice: 'Curso apagado com sucesso'
+    redirect_to admin_courses_path, notice: 'Curso apagado com sucesso'
   end
 
   def enroll

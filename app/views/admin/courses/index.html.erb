@@ -3,10 +3,10 @@
 <% end %>
 
 <% @courses.each do |course| %>
-  <h1><%= link_to course.name, course %></h1>
+  <h1><%= link_to course.name, [:admin, course] %></h1>
   <p><%= course.description %></p>
   <p><%= number_to_currency course.price %></p>
 <% end %>
 
-<%= link_to 'Registrar um Curso', new_course_path %>
+<%= link_to 'Registrar um Curso', new_admin_course_path %>
 <%= button_to 'Voltar', root_path, method: :get %>
