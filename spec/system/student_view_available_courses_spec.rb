@@ -98,7 +98,4 @@ describe 'Student view courses on homepage' do
     expect(page).to_not have_link 'Comprar'
     expect(page).to have_link 'Monkey Patch'
   end
-
-  xit 'without enrollment cannot view lesson link' do
-  end
 end

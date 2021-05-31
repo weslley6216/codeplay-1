@@ -7,4 +7,7 @@ class Course < ApplicationRecord
   validates :code, uniqueness: true
 
   has_one_attached :banner
+
+  scope :available, -> { where(enrollment_deadline: Date.current..) }
+  scope :min_to_max, -> { order(price: :asc) }
 end
