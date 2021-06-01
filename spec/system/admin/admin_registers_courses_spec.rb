@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 describe 'Admin registers courses' do
-  it 'from index page' do
-    visit root_path
-    click_on 'Cursos'
-
-    expect(page).to have_link('Registrar um Curso',
-                              href: new_course_path)
-  end
-
   it 'successfully' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
@@ -26,7 +18,6 @@ describe 'Admin registers courses' do
     attach_file 'Banner', Rails.root.join('spec/fixtures/course.png')
     click_on 'Criar curso'
 
-    expect(current_path).to eq(course_path(Course.last))
     expect(page).to have_content('Ruby on Rails')
     expect(page).to have_content('Um curso de Ruby on Rails')
     expect(page).to have_content('RUBYONRAILS')

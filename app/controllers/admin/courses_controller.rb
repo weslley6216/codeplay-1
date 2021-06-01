@@ -16,7 +16,7 @@ class Admin::CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
-      redirect_to @course
+      redirect_to [:admin, @course]
     else
       @instructors = Instructor.all
       render :new
@@ -29,7 +29,7 @@ class Admin::CoursesController < ApplicationController
 
   def update
     @course.update(course_params)
-    redirect_to @course, notice: t('.success')
+    redirect_to [:admin, @course], notice: t('.success')
   end
 
   def destroy
