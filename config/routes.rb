@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses, only: [:show] do
-    resources :lessons, only: %i[show new create]
+    resources :lessons, only: %i[show]
     post 'enroll', on: :member
     get 'my_courses', on: :collection
   end
