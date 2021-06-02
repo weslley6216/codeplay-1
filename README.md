@@ -22,3 +22,23 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+# API
+
+## Obtendo um curso
+
+```
+GET 'api/v1/courses'
+```
+
+resposta:
+
+```json
+[
+  {
+    id: 10,
+    name: 'Ruby on Rails'
+  }
+]
+```

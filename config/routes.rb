@@ -1,3 +1,5 @@
+# get localhost:3000/api/courses
+
 Rails.application.routes.draw do
   root 'home#index'
   devise_for :users
@@ -13,5 +15,11 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[show]
     post 'enroll', on: :member
     get 'my_courses', on: :collection
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :courses, only: %i[index show create], param: :code
+    end
   end
 end
