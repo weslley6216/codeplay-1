@@ -23,14 +23,13 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and view enrollment link' do
-    student = Student.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: 1.month.from_now, instructor: instructor)
 
-    login_as student, scope: :student
+    student_login
     visit root_path
     click_on 'Ruby'
 
@@ -67,7 +66,7 @@ describe 'Student view courses on homepage' do
                             code: 'ELIXIRBASIC', price: 20,
                             enrollment_deadline: 1.month.from_now, instructor: instructor)
 
-    login_as user, scope: :user
+    student_login
     visit root_path
     click_on 'Ruby'
     click_on 'Comprar'
@@ -81,7 +80,7 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and cannot buy a course twice' do
-    user = User.create!(email: 'jane@test.com.br', password: '123456')
+    student = student_login
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -89,9 +88,8 @@ describe 'Student view courses on homepage' do
                             enrollment_deadline: 1.month.from_now, instructor: instructor)
     Lesson.create!(name: 'Monkey Patch', course: available_course, duration: 20,
                    content: 'Uma aula legal')
-    Enrollment.create!(user: user, course: available_course)
+    Enrollment.create!(student: student, course: available_course)
 
-    login_as user, scope: :user
     visit root_path
     click_on 'Ruby'
 

@@ -1,5 +1,8 @@
 ---
 pt-BR:
+  courses:
+    show:
+      empty: 'Esse curso ainda não tem aulas cadastradas'
   admin:
     courses:
       new:

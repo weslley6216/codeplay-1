@@ -33,11 +33,10 @@ describe 'Student view lesson' do
 
     visit course_lesson_path(course, lesson)
 
-    expect(current_path).to eq(new_user_session_path)
+    expect(current_path).to eq(new_student_session_path)
   end
 
   it 'without enrollment cannot view lesson' do
-    user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -46,7 +45,7 @@ describe 'Student view lesson' do
     lesson = Lesson.create!(name: 'Monkey Patch', course: course, duration: 20,
                             content: 'Uma aula legal')
 
-    login_as user, scope: :user
+    student_login
     visit course_lesson_path(course, lesson)
 
     expect(current_path).to eq(course_path(course))

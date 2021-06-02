@@ -1,5 +1,5 @@
 class Admin::CoursesController < Admin::AdminController
-  before_action :set_course, only: %i[show edit update destroy enroll]
+  before_action :set_course, only: %i[show edit update destroy]
 
   def index
     @courses = Course.all
@@ -35,11 +35,6 @@ class Admin::CoursesController < Admin::AdminController
   def destroy
     @course.destroy
     redirect_to admin_courses_path, notice: 'Curso apagado com sucesso'
-  end
-
-  def enroll
-    current_user.enrollments.create(course: @course, price: @course.price)
-    redirect_to my_courses_courses_path, notice: 'Curso comprado com sucesso'
   end
 
   def my_courses
