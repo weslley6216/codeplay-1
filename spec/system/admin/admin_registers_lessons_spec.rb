@@ -8,6 +8,7 @@ describe 'Admin registers lessons' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
 
+    user_login
     visit admin_course_path(course)
     click_on 'Registrar uma aula'
     fill_in 'Nome', with: 'Duck Typing'
@@ -28,6 +29,7 @@ describe 'Admin registers lessons' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
 
+    user_login
     visit admin_course_path(course)
     click_on 'Registrar uma aula'
     click_on 'Cadastrar'
@@ -35,5 +37,18 @@ describe 'Admin registers lessons' do
     expect(page).to have_text('Nome não pode ficar em branco')
     expect(page).to have_text('Duração não pode ficar em branco')
     expect(page).to have_text('Conteúdo não pode ficar em branco')
+  end
+
+  it 'must be logged in to create lesson' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033',
+                            instructor: instructor)
+
+    visit new_admin_course_lesson_path(course)
+
+    expect(current_path).to eq(new_user_session_path)
   end
 end
