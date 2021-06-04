@@ -13,7 +13,7 @@ describe 'Courses API' do
                     code: 'RUBYONRAILS', price: 20,
                     enrollment_deadline: '20/12/2033', instructor: instructor)
 
-      get '/api/v1/courses'
+      get '/api/v1/courses', params: { user_id: 10 }
 
       expect(response).to have_http_status(200)
       expect(response.content_type).to include('application/json')
@@ -77,6 +77,28 @@ describe 'Courses API' do
       expect(parsed_body['name']).to eq('Ruby on Rails')
       expect(parsed_body['code']).to eq('RUBYONRAILS')
       expect(parsed_body['price']).to eq('10.0')
+    end
+
+    it 'should not create a course with invalid params' do
+      post '/api/v1/courses', params: { course: { number: 10 } }
+
+      expect(response).to have_http_status(422)
+      expect(response.content_type).to include('application/json')
+      expect(parsed_body['name']).to eq(['não pode ficar em branco'])
+      expect(parsed_body['code']).to include('não pode ficar em branco')
+      expect(parsed_body['price']).to include('não pode ficar em branco')
+      expect(parsed_body['instructor']).to include('é obrigatório(a)')
+    end
+
+    xit 'code must be unique' do
+    end
+
+    it 'should not create a course with invalid parameters' do
+      post '/api/v1/courses'
+
+      expect(response).to have_http_status(412)
+      expect(response.content_type).to include('application/json')
+      expect(response.body).to include('parâmetros inválidos')
     end
   end
 
