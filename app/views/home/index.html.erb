@@ -1,9 +1,19 @@
-<h1>Codeplay</h1>
-<h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
+<div class="container">
+  <h1>Codeplay</h1>
+  <h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
 
-<h3>Cursos Disponíveis</h3>
-<% @courses.each do |c| %>
-  <%= link_to c.name, c %>
-  <p><%= c.description %></p>
-  <p><%= number_to_currency c.price %></p>
-<% end %>
+  <h3>Cursos Disponíveis</h3>
+  <div class="row">
+    <% @courses.each do |c| %>
+      <div class="card col-3 mx-3">
+        <div class="card-header">
+          <%= link_to c.name, c %>
+        </div>
+        <div class="card-body">
+          <p><%= c.description %></p>
+          <p><%= number_to_currency c.price %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
