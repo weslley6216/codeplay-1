@@ -1,3 +1,5 @@
+raise 'Do not run seed on product' unless Rails.env.development?
+
 instructor = Instructor.create!(name: 'Fulano Sicrano',
                                 email: 'fulano@codeplay.com.br')
 Course.create!(name: 'Ruby', description: 'Um curso de Ruby',

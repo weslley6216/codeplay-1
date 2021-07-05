@@ -62,14 +62,13 @@ describe 'Courses API' do
 
   context 'POST /api/v1/courses' do
     it 'should create a course' do
-      instructor = Instructor.create!(name: 'Fulano Sicrano',
-                                      email: 'fulano@codeplay.com.br')
+      instructor = create(:instructor)
 
       post '/api/v1/courses', params: { 
         course: { 
           name: 'Ruby on Rails', code: 'RUBYONRAILS', price: 10,
           instructor_id: instructor.id
-        },
+        }
       }
 
       expect(response).to have_http_status(201)
