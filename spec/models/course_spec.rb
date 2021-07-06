@@ -19,4 +19,19 @@ describe Course do
       expect(course.errors[:code]).to include('já está em uso')
     end
   end
+
+  context 'code' do
+    it 'generate a random code when creating' do
+      course = create(:course)
+      expect(course.code).to be_present
+    end
+
+    it 'generate another code if repeats' do
+      course = create(:course)
+      another_course = build(:course)
+      allow(SecureRandom).to receive(:base58).and_return(course.code, 'f1DoB2djcqMmEcx4qCtm')
+      another_course.save
+      expect(course.code).not_to eq(another_course.code)
+    end
+  end
 end
