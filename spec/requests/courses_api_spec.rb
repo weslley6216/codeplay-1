@@ -6,12 +6,12 @@ describe 'Courses API' do
       instructor = Instructor.create!(name: 'Fulano Sicrano',
                                       email: 'fulano@codeplay.com.br')
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', instructor: instructor)
+                     code: 'RUBYBASIC', price: 10,
+                     enrollment_deadline: '22/12/2033', instructor: instructor)
       Course.create!(name: 'Ruby on Rails',
-                    description: 'Um curso de Ruby on Rails',
-                    code: 'RUBYONRAILS', price: 20,
-                    enrollment_deadline: '20/12/2033', instructor: instructor)
+                     description: 'Um curso de Ruby on Rails',
+                     code: 'RUBYONRAILS', price: 20,
+                     enrollment_deadline: '20/12/2033', instructor: instructor)
 
       get '/api/v1/courses', params: { user_id: 10 }
 
@@ -38,12 +38,12 @@ describe 'Courses API' do
       instructor = Instructor.create!(name: 'Fulano Sicrano',
                                       email: 'fulano@codeplay.com.br')
       course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', instructor: instructor)
+                              code: 'RUBYBASIC', price: 10,
+                              enrollment_deadline: '22/12/2033', instructor: instructor)
       Course.create!(name: 'Ruby on Rails',
-                    description: 'Um curso de Ruby on Rails',
-                    code: 'RUBYONRAILS', price: 20,
-                    enrollment_deadline: '20/12/2033', instructor: instructor)
+                     description: 'Um curso de Ruby on Rails',
+                     code: 'RUBYONRAILS', price: 20,
+                     enrollment_deadline: '20/12/2033', instructor: instructor)
 
       get "/api/v1/courses/#{course.code}"
 
@@ -64,8 +64,8 @@ describe 'Courses API' do
     it 'should create a course' do
       instructor = create(:instructor)
 
-      post '/api/v1/courses', params: { 
-        course: { 
+      post '/api/v1/courses', params: {
+        course: {
           name: 'Ruby on Rails', code: 'RUBYONRAILS', price: 10,
           instructor_id: instructor.id
         }

@@ -109,8 +109,8 @@ describe 'Admin view courses' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
 
-     visit admin_course_path(course)
+    visit admin_course_path(course)
 
-     expect(current_path).to eq(new_user_session_path)
+    expect(current_path).to eq(new_user_session_path)
   end
 end

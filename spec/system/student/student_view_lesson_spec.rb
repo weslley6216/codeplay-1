@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 describe 'Student view lesson' do
-  xit 'successfully' do
-  end
+  xit 'successfully'
 
   it 'without enrollment cannot view lesson link' do
     user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                            code: 'RUBYBASIC', price: 10,
-                            enrollment_deadline: 1.month.from_now, instructor: instructor)
+                                      code: 'RUBYBASIC', price: 10,
+                                      enrollment_deadline: 1.month.from_now, instructor: instructor)
     Lesson.create!(name: 'Monkey Patch', course: available_course, duration: 20,
                    content: 'Uma aula legal')
 
